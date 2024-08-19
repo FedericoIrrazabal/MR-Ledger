@@ -1,8 +1,10 @@
 import { Button } from "@/components/ui/button";
 import { createClient } from "@/utils/supabase/server";
+import { headers } from "next/headers";
 import { redirect } from "next/navigation";
 
 export default function Login() {
+  const origin = headers().get("origin");
   const signIn = async () => {
     "use server";
 
@@ -11,7 +13,7 @@ export default function Login() {
     const { data } = await supabase.auth.signInWithOAuth({
       provider: "google",
       options: {
-        redirectTo: `${process.env.NEXT_PUBLIC_URL}/auth/callback`,
+        redirectTo: `${origin}/auth/callback`,
         queryParams: {
           access_type: "offline",
           prompt: "consent",
