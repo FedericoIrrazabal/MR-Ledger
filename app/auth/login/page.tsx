@@ -1,13 +1,18 @@
 import { Button } from "@/components/ui/button";
 import { createClient } from "@/utils/supabase/server";
-import { headers } from "next/headers";
 import { redirect } from "next/navigation";
 
+const getURL = () => {
+  let url =
+    process?.env?.NEXT_PUBLIC_SITE_URL ??
+    process?.env?.NEXT_PUBLIC_VERCEL_URL ??
+    "http://localhost:3000/";
+  url = url.startsWith("http") ? url : `https://${url}`;
+  url = url.endsWith("/") ? url : `${url}/`;
+  return url;
+};
+
 export default function Login() {
-  const origin = headers().get("origin");
-
-  console.log(origin);
-
   const signIn = async () => {
     "use server";
 
@@ -16,7 +21,7 @@ export default function Login() {
     const { data } = await supabase.auth.signInWithOAuth({
       provider: "google",
       options: {
-        redirectTo: `${origin}/auth/callback`,
+        redirectTo: `${getURL()}/auth/callback`,
         queryParams: {
           access_type: "offline",
           prompt: "consent",
