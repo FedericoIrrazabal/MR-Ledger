@@ -5,6 +5,9 @@ import { redirect } from "next/navigation";
 
 export default function Login() {
   const origin = headers().get("origin");
+
+  console.log(origin);
+
   const signIn = async () => {
     "use server";
 
