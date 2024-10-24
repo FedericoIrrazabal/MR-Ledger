@@ -2,7 +2,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { PencilIcon, Trash2, WalletIcon } from "lucide-react";
+import { PencilIcon, Trash2 } from "lucide-react";
 import { Transaction } from "@/interfaces/transaction";
 import { getInitials } from "@/utils/get-initials";
 import { TransactionFormDialog } from "./TransactionFormDialog";
@@ -13,6 +13,8 @@ import {
 } from "@/app/constants/categories";
 import { TransactionItem } from "./TransactionItem";
 import { formatCurrency } from "@/utils/format-currency";
+import { format } from "date-fns";
+import { es } from "date-fns/locale";
 
 interface Props {
   transaction: Transaction;
@@ -43,7 +45,9 @@ export const TransactionCard = ({ transaction, userId }: Props) => {
               {transaction.type === "income" ? "Ingreso" : "Egreso"}
             </Badge>
             <span className="text-muted-foreground text-xs">
-              {new Date(transaction.created_at).toLocaleDateString()}
+              {format(transaction.created_at, "dd 'de' MMMM yyyy", {
+                locale: es,
+              })}
             </span>
           </div>
           <div className="text-2xl font-semibold">

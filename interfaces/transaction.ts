@@ -6,6 +6,7 @@ export interface Transaction {
   description: string;
   category: string;
   created_at: Date;
+  is_reported: boolean;
   profiles: Profiles;
 }
 
@@ -24,4 +25,21 @@ export interface TransactionFormValues {
   amount: number;
   description: string;
   category: string;
+}
+
+export interface DateRange {
+  from: string;
+  to: string;
+}
+
+export interface ReportSummary {
+  transactions: Transaction[];
+  totalIncome: number;
+  totalExpenses: number;
+  netBalance: number;
+  userProfile: {
+    full_name: string;
+    avatar_url: string;
+  };
+  dateRange: DateRange;
 }

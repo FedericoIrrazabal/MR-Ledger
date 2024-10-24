@@ -3,7 +3,7 @@ import Link from "next/link";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
-import { LogOut, CreditCard, Menu } from "lucide-react";
+import { LogOut, CreditCard, Menu, ScrollText } from "lucide-react";
 
 interface SidebarProps {
   userName: string;
@@ -30,6 +30,15 @@ const SidebarContent = ({ userName, userImage, onLogout }: SidebarProps) => (
           >
             <CreditCard className="w-5 h-5" />
             <span>Transacciones</span>
+          </Link>
+        </li>
+        <li>
+          <Link
+            href="/admin/reports"
+            className="flex items-center space-x-3 p-2 rounded-lg hover:bg-accent transition-colors duration-200"
+          >
+            <ScrollText className="w-5 h-5" />
+            <span>Reportes</span>
           </Link>
         </li>
       </ul>

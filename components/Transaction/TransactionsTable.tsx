@@ -18,6 +18,8 @@ import {
   incomeCategories,
 } from "@/app/constants/categories";
 import { formatCurrency } from "@/utils/format-currency";
+import { format } from "date-fns";
+import { es } from "date-fns/locale";
 
 interface Props {
   transactions: Transaction[];
@@ -59,7 +61,9 @@ export const TransactionsTable = ({ transactions, userId }: Props) => {
             <TableCell>{transaction.description}</TableCell>
             <TableCell>{transaction.category}</TableCell>
             <TableCell>
-              {new Date(transaction.created_at).toLocaleDateString()}
+              {format(transaction.created_at, "dd 'de' MMMM yyyy", {
+                locale: es,
+              })}
             </TableCell>
             <TableCell>
               <TransactionFormDialog
